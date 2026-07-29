@@ -23,45 +23,6 @@ mkdir -p "$WORK"
 : > "$LIVE"
 echo "watch with: tail -f $LIVE"
 
-# Deterministic fixture generator: "base" writes the pre-change tree,
-# "change" rewrites it with docstrings + new functions (~200-line diff).
-cat > "$WORK/gen_fixture.py" <<'PY'
-import pathlib, sys
-mode = sys.argv[1]
-src = pathlib.Path("src"); src.mkdir(exist_ok=True)
-math_fns = ["add", "sub", "mul", "div", "mod", "power", "floor_div", "neg", "absval", "sign"]
-new_math_fns = ["clamp", "lerp", "mean", "median_of_three", "gcd"]
-str_fns = ["upper", "lower", "title", "reverse", "strip_all", "first_word", "last_word", "word_count"]
-date_fns = ["is_leap_year", "days_in_month", "day_of_year", "iso_week", "add_days",
-            "diff_days", "start_of_month", "end_of_month", "is_weekend", "next_weekday",
-            "quarter", "format_iso", "parse_iso", "age_in_years", "same_day"]
-
-def fn(name, doc):
-    lines = [f"def {name}(a, b=None):"]
-    if doc:
-        title = name.replace("_", " ").capitalize()
-        lines += ['    """' + title + " operation.", "", "    Args:",
-                  "        a: first operand", "        b: optional second operand",
-                  '    """']
-    lines.append("    return (a, b)")
-    return "\n".join(lines) + "\n"
-
-def module(fns, doc):
-    return "\n".join(fn(f, doc) for f in fns)
-
-if mode == "base":
-    (src / "mathutils.py").write_text(module(math_fns, doc=False))
-    (src / "strutils.py").write_text(module(str_fns, doc=False))
-    pathlib.Path("README.md").write_text("# fixture\n\nA tiny utility library used as an experiment fixture.\n")
-else:
-    (src / "mathutils.py").write_text(module(math_fns + new_math_fns, doc=True))
-    (src / "strutils.py").write_text(module(str_fns, doc=True))
-    (src / "dateutils.py").write_text(module(date_fns, doc=True))
-    pathlib.Path("README.md").write_text(
-        "# fixture\n\nA tiny utility library used as an experiment fixture.\n\n"
-        "## Modules\n\n- mathutils: arithmetic helpers\n- strutils: string helpers\n- dateutils: date helpers\n")
-PY
-
 seed_fixture() {
   rm -rf "$FIX"
   mkdir -p "$FIX"
@@ -70,10 +31,10 @@ seed_fixture() {
     git init -qb main
     git config user.email eval@grunt.local
     git config user.name "grunt eval"
-    python3 "$WORK/gen_fixture.py" base
+    python3 "$ROOT/evals/gen_fixture.py" base
     git add -A
     git commit -qm "initial"
-    python3 "$WORK/gen_fixture.py" change
+    python3 "$ROOT/evals/gen_fixture.py" change
     git add -A
   )
 }

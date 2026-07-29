@@ -1,0 +1,51 @@
+[
+  {
+    "name": "commit",
+    "type": "chore",
+    "fixture": "staged",
+    "success": "commit",
+    "prompt": "Commit the staged changes with a clear message."
+  },
+  {
+    "name": "pr-desc",
+    "type": "chore",
+    "fixture": "staged",
+    "success": "file:PR.md",
+    "prompt": "Write a pull request description for the staged changes into a new file PR.md (title line + summary + bullet list of changes). Don't commit anything."
+  },
+  {
+    "name": "log-filter",
+    "type": "chore",
+    "fixture": "log",
+    "success": "file:errors.md",
+    "prompt": "Find all ERROR lines in app.log, count them per service, and write the per-service counts plus one example line each into a new file errors.md."
+  },
+  {
+    "name": "changelog",
+    "type": "chore",
+    "fixture": "staged",
+    "success": "commit",
+    "prompt": "Add a CHANGELOG.md entry summarizing the staged changes, stage it, and commit everything with a clear message."
+  },
+  {
+    "name": "probe-debug",
+    "type": "probe",
+    "fixture": "staged",
+    "success": "none",
+    "prompt": "Why might the div function in src/mathutils.py misbehave with floats? Explain your reasoning, don't change anything."
+  },
+  {
+    "name": "probe-refactor",
+    "type": "probe",
+    "fixture": "staged",
+    "success": "none",
+    "prompt": "Refactor src/mathutils.py for readability and consistency. Use your judgment about the structure."
+  },
+  {
+    "name": "probe-explain",
+    "type": "probe",
+    "fixture": "staged",
+    "success": "none",
+    "prompt": "What does this repository do? Give me an overview of its purpose and layout."
+  }
+]

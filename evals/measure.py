@@ -79,14 +79,14 @@ def find_transcript(sid):
     return hits[0] if hits else None
 
 
-def split_at_marker(path):
+def split_at_marker(path, marker=FOLLOWUP_MARKER):
     """Return (events before follow-up prompt, events from it onward)."""
     lines = list(events(path))
     idx = None
     for i, e in enumerate(lines):
         if e.get("type") == "user" and not e.get("toolUseResult"):
             content = (e.get("message") or {}).get("content")
-            if content is not None and FOLLOWUP_MARKER in json.dumps(content):
+            if content is not None and marker in json.dumps(content):
                 idx = i
     if idx is None:
         return lines, []

@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Turn `claude -p --output-format stream-json` into a human-readable tail.
 
-Usage: claude -p ... --output-format stream-json | python3 tail_format.py
+Usage: claude -p ... --output-format stream-json | python3 tail_format.py [prefix]
 """
 import json
 import sys
+
+PREFIX = (sys.argv[1] + " ") if len(sys.argv) > 1 else ""
 
 
 def block_line(b):
@@ -29,13 +31,13 @@ for line in sys.stdin:
         continue
     t = e.get("type")
     if t == "system" and e.get("subtype") == "init":
-        print(f"[session {e.get('session_id', '?')[:8]} model={e.get('model', '?')}]", flush=True)
+        print(f"{PREFIX}[session {e.get('session_id', '?')[:8]} model={e.get('model', '?')}]", flush=True)
     elif t == "assistant":
         for b in (e.get("message") or {}).get("content", []):
             out = block_line(b)
             if out:
-                print(out, flush=True)
+                print(PREFIX + out, flush=True)
     elif t == "result":
         cost = e.get("total_cost_usd")
         dur = e.get("duration_ms", 0) / 1000
-        print(f"[done in {dur:.0f}s" + (f", ~${cost:.4f}]" if cost is not None else "]"), flush=True)
+        print(f"{PREFIX}[done in {dur:.0f}s" + (f", ~${cost:.4f}]" if cost is not None else "]"), flush=True)
