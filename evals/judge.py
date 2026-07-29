@@ -10,6 +10,7 @@ Two checks over artifacts left in evals/work/trials/ by bench.sh:
 Usage: python3 judge.py [trials_dir]   -> writes markdown to stdout
 """
 import concurrent.futures
+import hashlib
 import json
 import os
 import pathlib
@@ -48,9 +49,10 @@ def artifact(task, repo):
 
 
 def judge_pair(task, trial, a_text, b_text):
-    # Blind shuffle: which arm plays X varies per (task, trial); the same
-    # value un-maps the verdict below, so mapping is always consistent.
-    a_is_x = (hash(f"{task}-{trial}") % 2 == 0)
+    # Blind shuffle: which arm plays X varies per (task, trial). md5, not
+    # hash() — Python string hashing is salted per process, and the shuffle
+    # must be reproducible across runs.
+    a_is_x = int(hashlib.md5(f"{task}-{trial}".encode()).hexdigest(), 16) % 2 == 0
     x, y = (a_text, b_text) if a_is_x else (b_text, a_text)
     prompt = f"""You are blind-judging two attempts at the same task. You do not know what produced either.
 

@@ -33,44 +33,51 @@ print(t['type']); print(t['fixture']); print(t['success']); print(t['prompt'])")
 
   TD="$WORK/trials/$arm-$task-$n"
   REPO="$TD/repo"
-  rm -rf "$TD"; mkdir -p "$REPO"
-  (
-    cd "$REPO"
-    git init -qb main
-    git config user.email eval@grunt.local
-    git config user.name "grunt eval"
-    python3 "$ROOT/evals/gen_fixture.py" base
-    git add -A && git commit -qm "initial"
-    if [ "$fixture" = "staged" ]; then
-      python3 "$ROOT/evals/gen_fixture.py" change && git add -A
-    else
-      python3 "$ROOT/evals/gen_fixture.py" "$fixture"
-    fi
-  )
-
-  SID=$(uuidgen | tr 'A-Z' 'a-z')
-  SID2=$(uuidgen | tr 'A-Z' 'a-z')
-  args=(--model "$MODEL" --dangerously-skip-permissions)
-  [ "$arm" = "B" ] && args+=(--plugin-dir "$ROOT")
   P="[$arm/$task/$n]"
 
-  (cd "$REPO" && env -u CLAUDE_CODE_SUBAGENT_MODEL claude -p "$prompt" "${args[@]}" --session-id "$SID" \
-      --output-format stream-json --verbose </dev/null 2>/dev/null \
-      | python3 "$ROOT/evals/tail_format.py" "$P" >> "$LIVE") || echo "$P warn: run nonzero exit"
+  # Up to 2 attempts: transient API errors (ECONNRESET etc.) kill a run
+  # without completing the task, so reseed and retry once before failing.
+  for attempt in 1 2; do
+    rm -rf "$TD"; mkdir -p "$REPO"
+    (
+      cd "$REPO"
+      git init -qb main
+      git config user.email eval@grunt.local
+      git config user.name "grunt eval"
+      python3 "$ROOT/evals/gen_fixture.py" base
+      git add -A && git commit -qm "initial"
+      if [ "$fixture" = "staged" ]; then
+        python3 "$ROOT/evals/gen_fixture.py" change && git add -A
+      else
+        python3 "$ROOT/evals/gen_fixture.py" "$fixture"
+      fi
+    )
 
-  if [ "$ttype" = "chore" ]; then
-    echo "$P ---- follow-up ----" >> "$LIVE"
-    (cd "$REPO" && env -u CLAUDE_CODE_SUBAGENT_MODEL claude -p "$FOLLOWUP" "${args[@]}" \
-        --resume "$SID" --fork-session --session-id "$SID2" \
+    SID=$(uuidgen | tr 'A-Z' 'a-z')
+    SID2=$(uuidgen | tr 'A-Z' 'a-z')
+    args=(--model "$MODEL" --dangerously-skip-permissions)
+    [ "$arm" = "B" ] && args+=(--plugin-dir "$ROOT")
+
+    (cd "$REPO" && env -u CLAUDE_CODE_SUBAGENT_MODEL claude -p "$prompt" "${args[@]}" --session-id "$SID" \
         --output-format stream-json --verbose </dev/null 2>/dev/null \
-        | python3 "$ROOT/evals/tail_format.py" "$P" >> "$LIVE") || echo "$P warn: follow-up nonzero exit"
-  fi
+        | python3 "$ROOT/evals/tail_format.py" "$P" >> "$LIVE") || echo "$P warn: run nonzero exit (attempt $attempt)"
 
-  ok=true
-  case "$success" in
-    commit) [ "$(git -C "$REPO" rev-list --count HEAD)" -ge 2 ] || ok=false ;;
-    file:*) [ -s "$REPO/${success#file:}" ] || ok=false ;;
-  esac
+    if [ "$ttype" = "chore" ]; then
+      echo "$P ---- follow-up ----" >> "$LIVE"
+      (cd "$REPO" && env -u CLAUDE_CODE_SUBAGENT_MODEL claude -p "$FOLLOWUP" "${args[@]}" \
+          --resume "$SID" --fork-session --session-id "$SID2" \
+          --output-format stream-json --verbose </dev/null 2>/dev/null \
+          | python3 "$ROOT/evals/tail_format.py" "$P" >> "$LIVE") || echo "$P warn: follow-up nonzero exit (attempt $attempt)"
+    fi
+
+    ok=true
+    case "$success" in
+      commit) [ "$(git -C "$REPO" rev-list --count HEAD)" -ge 2 ] || ok=false ;;
+      file:*) [ -s "$REPO/${success#file:}" ] || ok=false ;;
+    esac
+    [ "$ok" = "true" ] && break
+    echo "$P attempt $attempt failed, $([ "$attempt" = "1" ] && echo retrying || echo giving up)"
+  done
   [ "$ok" = "true" ] || echo "$P TASK FAILED"
 
   printf '{"arm":"%s","task":"%s","type":"%s","trial":%s,"sid":"%s","sid2":"%s","success":%s}\n' \
@@ -81,6 +88,7 @@ fi
 # ---------- main ------------------------------------------------------------
 N=${1:-3}
 FILTER=${2:-.}
+ARMS=${ARMS:-"A B"}   # e.g. ARMS=B for a plugin-arm-only rerun
 
 rm -rf "$WORK/trials"
 mkdir -p "$WORK/trials" "$ROOT/evals/snapshots"
@@ -92,9 +100,9 @@ while IFS='|' read -r name ttype; do
   echo "$name" | grep -qE "$FILTER" || continue
   for i in $(seq 1 "$N"); do
     if [ "$ttype" = "chore" ]; then
-      specs+=("A|$name|$i" "B|$name|$i")
+      for arm in $ARMS; do specs+=("$arm|$name|$i"); done
     else
-      specs+=("B|$name|$i")
+      case " $ARMS " in *" B "*) specs+=("B|$name|$i") ;; esac
     fi
   done
 done < <(python3 -c "
