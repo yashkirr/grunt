@@ -82,6 +82,10 @@ REASON: one sentence"""
     return {"task": task, "trial": trial, "winner": winner, "reason": reason}
 
 
+def was_delegated(sid):
+    return bool(glob.glob(os.path.expanduser(f"~/.claude/projects/*/{sid}/subagents/*.jsonl")))
+
+
 def expected_log_counts():
     counts = {"auth": 0, "payments": 0, "search": 0}
     services = ["auth", "payments", "search"]
@@ -113,6 +117,7 @@ def objective_checks():
 
 def main():
     pairs = {}
+    skipped = 0
     for d in sorted(TRIALS.iterdir()):
         tj = d / "trial.json"
         if not tj.exists():
@@ -120,8 +125,15 @@ def main():
         row = json.load(open(tj))
         if row["type"] != "chore":
             continue
+        if row["arm"] == "B" and not was_delegated(row["sid"]):
+            # If the main model didn't delegate, the artifact is its own
+            # work and says nothing about the cheap model's quality.
+            skipped += 1
+            continue
         text = artifact(row["task"], d / "repo")
         pairs.setdefault((row["task"], row["trial"]), {})[row["arm"]] = text
+    if skipped:
+        print(f"skipped {skipped} arm-B trials where delegation did not happen", file=sys.stderr)
 
     jobs = [(t, n, arms["A"], arms["B"]) for (t, n), arms in sorted(pairs.items())
             if arms.get("A") and arms.get("B")]

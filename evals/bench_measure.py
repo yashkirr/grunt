@@ -59,7 +59,8 @@ def cmd_collect(args):
         row.update(m)
         trials.append(row)
     date = subprocess.run(["date", "-u", "+%Y-%m-%dT%H:%M:%SZ"], capture_output=True, text=True).stdout.strip()
-    json.dump({"meta": {"model": args.model, "generated": date, "followup": args.followup}, "trials": trials},
+    json.dump({"meta": {"model": args.model, "grunt_model": args.grunt_model,
+                        "generated": date, "followup": args.followup}, "trials": trials},
               sys.stdout, indent=1)
 
 
@@ -89,7 +90,8 @@ def cmd_report(args):
         return t["exp"]["cost"] + t["sub"]["cost"] + t["followup_exp"]["cost"]
 
     print(f"# grunt benchmark\n")
-    print(f"Model {snap['meta']['model']}, generated {snap['meta']['generated']}. "
+    gm = snap["meta"].get("grunt_model", "haiku")
+    print(f"Model {snap['meta']['model']}, executor {gm}, generated {snap['meta']['generated']}. "
           f"Arm A = no plugin, arm B = grunt. Values: median ±stdev across trials.\n")
 
     print("## Per-task results\n")
@@ -149,6 +151,7 @@ def main():
     c = sub.add_parser("collect")
     c.add_argument("trials_dir")
     c.add_argument("--model", required=True)
+    c.add_argument("--grunt-model", default="haiku")
     c.add_argument("--followup", required=True)
     r = sub.add_parser("report")
     r.add_argument("snapshot")

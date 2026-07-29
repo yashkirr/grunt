@@ -113,7 +113,9 @@ for t in json.load(open('$TASKS')):
 echo "running ${#specs[@]} trials, $PAR in parallel, model $MODEL"
 printf '%s\n' "${specs[@]}" | xargs -P "$PAR" -I{} "$0" --run-one {}
 
-SNAP="$ROOT/evals/snapshots/results.json"
-python3 "$ROOT/evals/bench_measure.py" collect "$WORK/trials" --model "$MODEL" --followup "$FOLLOWUP" > "$SNAP"
+# OUT=sonnet writes results-sonnet.json / benchmark-sonnet.md etc.
+SNAP="$ROOT/evals/snapshots/results${OUT:+-$OUT}.json"
+python3 "$ROOT/evals/bench_measure.py" collect "$WORK/trials" --model "$MODEL" \
+  --grunt-model "${GRUNT_MODEL:-haiku}" --followup "$FOLLOWUP" > "$SNAP"
 echo "snapshot: $SNAP"
-python3 "$ROOT/evals/bench_measure.py" report "$SNAP" | tee "$ROOT/evals/benchmark.md"
+python3 "$ROOT/evals/bench_measure.py" report "$SNAP" | tee "$ROOT/evals/benchmark${OUT:+-$OUT}.md"
