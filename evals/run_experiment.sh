@@ -17,8 +17,11 @@ MODEL=claude-fable-5
 CHORE="Commit the staged changes with a clear message."
 FOLLOWUP="In one sentence, what did that commit change?"
 MANIFEST="$WORK/manifest.json"
+LIVE="$WORK/live.log"
 
 mkdir -p "$WORK"
+: > "$LIVE"
+echo "watch with: tail -f $LIVE"
 
 # Deterministic fixture generator: "base" writes the pre-change tree,
 # "change" rewrites it with docstrings + new functions (~200-line diff).
@@ -79,6 +82,8 @@ rows=()
 for arm in A B; do
   for i in $(seq 1 "$N"); do
     echo "=== arm $arm trial $i/$N ==="
+    echo "" >> "$LIVE"
+    echo "════ arm $arm trial $i/$N — chore ════" >> "$LIVE"
     seed_fixture
 
     SID=$(uuidgen | tr 'A-Z' 'a-z')
@@ -88,7 +93,9 @@ for arm in A B; do
       args+=(--plugin-dir "$ROOT")
     fi
 
-    (cd "$FIX" && claude -p "$CHORE" "${args[@]}" --session-id "$SID" >/dev/null 2>&1) \
+    (cd "$FIX" && claude -p "$CHORE" "${args[@]}" --session-id "$SID" \
+        --output-format stream-json --verbose 2>/dev/null \
+        | python3 "$ROOT/evals/tail_format.py" >> "$LIVE") \
       || echo "warn: chore run nonzero exit"
 
     commit_ok=true
@@ -97,7 +104,10 @@ for arm in A B; do
       commit_ok=false
     fi
 
-    (cd "$FIX" && claude -p "$FOLLOWUP" "${args[@]}" --resume "$SID" --fork-session --session-id "$SID2" >/dev/null 2>&1) \
+    echo "──── arm $arm trial $i/$N — follow-up ────" >> "$LIVE"
+    (cd "$FIX" && claude -p "$FOLLOWUP" "${args[@]}" --resume "$SID" --fork-session --session-id "$SID2" \
+        --output-format stream-json --verbose 2>/dev/null \
+        | python3 "$ROOT/evals/tail_format.py" >> "$LIVE") \
       || echo "warn: follow-up run nonzero exit"
 
     rows+=("{\"arm\":\"$arm\",\"trial\":$i,\"sid\":\"$SID\",\"sid2\":\"$SID2\",\"commit_ok\":$commit_ok}")

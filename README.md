@@ -52,11 +52,30 @@ claude --plugin-dir /path/to/grunt
 
 ## Does it actually save tokens?
 
-Yes — measured, not vibes. See [evals/results.md](evals/results.md).
-Reproduce with `evals/run_experiment.sh` (runs real headless A/B sessions and
-parses the session transcripts for exact per-model token usage).
+Yes — measured, not vibes. N=5 trials per arm, real headless `claude -p`
+sessions on `claude-fable-5`, committing an identical ~300-line staged change,
+then one follow-up question. Token counts parsed from the session transcripts;
+dollar figures use API list prices as a proxy for limit burn.
 
-<!-- results table inserted after experiment run -->
+| Metric (median) | Baseline (fable does it) | With grunt (haiku does it) |
+|---|---:|---:|
+| Fable input tokens, chore turn | 169,090 | 61,085 (**-64%**) |
+| Haiku tokens, subagent | 0 | 27,649 (~$0.03) |
+| Fable input tokens, follow-up turn | 38,288 | 31,546 (-18%) |
+| Fable cost, chore turn | $0.537 | $0.349 (**-35%**) |
+| Total cost, all models | $0.813 | $0.569 (**-30%**) |
+
+- Delegation triggered in **5/5** headless trials; the commit landed every time.
+- No overlap between arms: costliest grunt trial ($0.377) beat the cheapest
+  baseline trial ($0.511).
+- The remaining fable spend is mostly fixed session overhead (system prompt,
+  plugins) paid in both arms — the *diff itself* never enters fable's context
+  with grunt. Bigger diffs and log dumps widen the gap.
+- The follow-up turn is cheaper because fable's context stays clean — that
+  saving repeats on every later turn of a real session.
+
+Full numbers: [evals/results.md](evals/results.md). Reproduce:
+`evals/run_experiment.sh 5` (watch live with `tail -f evals/work/live.log`).
 
 ## Limitations
 
