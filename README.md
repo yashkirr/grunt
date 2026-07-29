@@ -72,30 +72,34 @@ claude --plugin-dir /path/to/grunt
 
 ## Does it actually save tokens?
 
-Yes — measured, not vibes. N=5 trials per arm, real headless `claude -p`
-sessions on `claude-fable-5`, committing an identical ~300-line staged change,
-then one follow-up question. Token counts parsed from the session transcripts;
-dollar figures use API list prices as a proxy for limit burn.
+Yes — measured, not vibes. Benchmark suite: 4 chore tasks (commit, PR
+description, log filtering, changelog) × 2 arms × 3 trials + 3 non-chore
+probes × 3 trials = 33 real headless `claude -p` sessions on
+`claude-fable-5`, run in parallel. Per-model token counts parsed from the
+session transcripts; dollar figures use API list prices as a proxy for
+limit burn. Raw numbers snapshot: [evals/snapshots/results.json](evals/snapshots/results.json).
 
-| Metric (median) | Baseline (fable does it) | With grunt (haiku does it) |
+| Metric (median, all chores) | Baseline | With grunt |
 |---|---:|---:|
-| Fable input tokens, chore turn | 169,090 | 61,085 (**-64%**) |
-| Haiku tokens, subagent | 0 | 27,649 (~$0.03) |
-| Fable input tokens, follow-up turn | 38,288 | 31,546 (-18%) |
-| Fable cost, chore turn | $0.537 | $0.349 (**-35%**) |
-| Total cost, all models | $0.813 | $0.569 (**-30%**) |
+| Expensive-model input tokens per chore | 166,204 | 95,223 (**-43%**) |
+| Expensive-model cost per chore | $0.548 | $0.397 (**-28%**) |
+| Total cost, all models | $0.810 | $0.654 (**-19%**) |
 
-- Delegation triggered in **5/5** headless trials; the commit landed every time.
-- No overlap between arms: costliest grunt trial ($0.377) beat the cheapest
-  baseline trial ($0.511).
-- The remaining fable spend is mostly fixed session overhead (system prompt,
-  plugins) paid in both arms — the *diff itself* never enters fable's context
-  with grunt. Bigger diffs and log dumps widen the gap.
-- The follow-up turn is cheaper because fable's context stays clean — that
-  saving repeats on every later turn of a real session.
+**Delegation accuracy: 12/12 chores delegated, 0/9 non-chore probes falsely
+delegated, 33/33 tasks completed successfully.** The criteria-based policy
+routes correctly in both directions.
 
-Full numbers: [evals/results.md](evals/results.md). Reproduce:
-`evals/run_experiment.sh 5` (watch live with `tail -f evals/work/live.log`).
+- Savings scale with how much bulky context the chore drags in: changelog
+  (write + stage + commit) saved the most (-$0.23/task), a short PR
+  description the least. Fixed session boot overhead is paid in both arms
+  and floors the delta on small tasks.
+- Numbers are per single chore in a fresh session; in a long working
+  session the clean-context effect compounds every subsequent turn.
+
+Per-task tables + honest "what this does NOT measure":
+[evals/benchmark.md](evals/benchmark.md). Reproduce: `evals/bench.sh 3`
+(watch live: `tail -f evals/work/live.log`; earlier single-task experiment:
+`evals/run_experiment.sh`, results in [evals/results.md](evals/results.md)).
 
 ## Limitations
 

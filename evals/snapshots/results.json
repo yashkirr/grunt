@@ -1,0 +1,1032 @@
+{
+ "meta": {
+  "model": "claude-fable-5",
+  "generated": "2026-07-29T14:43:41Z",
+  "followup": "In one sentence, what did that accomplish?"
+ },
+ "trials": [
+  {
+   "arm": "A",
+   "task": "changelog",
+   "type": "chore",
+   "trial": 1,
+   "sid": "973d0180-5d46-40dd-a48c-0780404522ef",
+   "sid2": "0a3402be-99f4-475c-b334-53757ab5f90b",
+   "success": true,
+   "exp": {
+    "in": 11714,
+    "out": 1744,
+    "cw": 21163,
+    "cr": 180946,
+    "cost": 0.6498235
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 544,
+    "out": 77,
+    "cw": 21367,
+    "cr": 17494,
+    "cost": 0.2938715
+   },
+   "delegated": false
+  },
+  {
+   "arm": "A",
+   "task": "changelog",
+   "type": "chore",
+   "trial": 2,
+   "sid": "01d46ed9-38bf-4fd2-b632-aa2d9f239c78",
+   "sid2": "4f4e08ef-33f8-4958-8444-b3be74bb599e",
+   "success": true,
+   "exp": {
+    "in": 11714,
+    "out": 1712,
+    "cw": 21030,
+    "cr": 180572,
+    "cost": 0.646187
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 423,
+    "out": 57,
+    "cw": 21196,
+    "cr": 17494,
+    "cost": 0.289524
+   },
+   "delegated": false
+  },
+  {
+   "arm": "A",
+   "task": "changelog",
+   "type": "chore",
+   "trial": 3,
+   "sid": "36a66d3c-d60e-42e1-9085-1f5dda03addd",
+   "sid2": "f8db4d51-3252-4e44-80b9-e33b5c08e249",
+   "success": true,
+   "exp": {
+    "in": 11716,
+    "out": 1783,
+    "cw": 21180,
+    "cr": 218212,
+    "cost": 0.6892719999999999
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 423,
+    "out": 68,
+    "cw": 21337,
+    "cr": 17494,
+    "cost": 0.2918365
+   },
+   "delegated": false
+  },
+  {
+   "arm": "A",
+   "task": "commit",
+   "type": "chore",
+   "trial": 1,
+   "sid": "6979d624-ee08-419c-9cad-49b0cac966f3",
+   "sid2": "05cad4e8-ff7d-4f8a-814a-692b188e0ae9",
+   "success": true,
+   "exp": {
+    "in": 11838,
+    "out": 1026,
+    "cw": 20545,
+    "cr": 138242,
+    "cost": 0.5647345
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 423,
+    "out": 64,
+    "cw": 20664,
+    "cr": 17494,
+    "cost": 0.283224
+   },
+   "delegated": false
+  },
+  {
+   "arm": "A",
+   "task": "commit",
+   "type": "chore",
+   "trial": 2,
+   "sid": "706590c2-5bdd-4d63-8a64-9c3057c5d0b8",
+   "sid2": "9e9ffd33-5815-452f-b5d2-4287dbb32ed4",
+   "success": true,
+   "exp": {
+    "in": 12236,
+    "out": 899,
+    "cw": 20788,
+    "cr": 139274,
+    "cost": 0.566434
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 423,
+    "out": 53,
+    "cw": 20855,
+    "cr": 17494,
+    "cost": 0.2850615
+   },
+   "delegated": false
+  },
+  {
+   "arm": "A",
+   "task": "commit",
+   "type": "chore",
+   "trial": 3,
+   "sid": "687aa231-f625-4387-a37a-a4133fed78ea",
+   "sid2": "28847638-14ef-43d2-8e5a-99ae7b1d2a56",
+   "success": true,
+   "exp": {
+    "in": 12236,
+    "out": 942,
+    "cw": 20696,
+    "cr": 139337,
+    "cost": 0.567497
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 423,
+    "out": 54,
+    "cw": 20815,
+    "cr": 17494,
+    "cost": 0.2846115
+   },
+   "delegated": false
+  },
+  {
+   "arm": "A",
+   "task": "log-filter",
+   "type": "chore",
+   "trial": 1,
+   "sid": "80d73250-c445-4eb2-a5ac-c00f0b70653f",
+   "sid2": "caab9c57-aef2-443c-b18b-984c4c8ecffa",
+   "success": true,
+   "exp": {
+    "in": 11711,
+    "out": 699,
+    "cw": 16866,
+    "cr": 99888,
+    "cost": 0.462773
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 423,
+    "out": 59,
+    "cw": 16954,
+    "cr": 17494,
+    "cost": 0.236599
+   },
+   "delegated": false
+  },
+  {
+   "arm": "A",
+   "task": "log-filter",
+   "type": "chore",
+   "trial": 2,
+   "sid": "c00c6230-846a-48f0-856a-e2c05aa5edc2",
+   "sid2": "10ec4e63-3fa5-470d-8937-cc47240f33f3",
+   "success": true,
+   "exp": {
+    "in": 11713,
+    "out": 1350,
+    "cw": 17151,
+    "cr": 132920,
+    "cost": 0.5319375000000001
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 423,
+    "out": 58,
+    "cw": 17232,
+    "cr": 17494,
+    "cost": 0.240024
+   },
+   "delegated": false
+  },
+  {
+   "arm": "A",
+   "task": "log-filter",
+   "type": "chore",
+   "trial": 3,
+   "sid": "36763f0f-5f99-4421-9bbd-dd356f598e04",
+   "sid2": "a16249cd-2c28-4bf4-893e-e6f626ad0e55",
+   "success": true,
+   "exp": {
+    "in": 11711,
+    "out": 858,
+    "cw": 16404,
+    "cr": 98876,
+    "cost": 0.463936
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 423,
+    "out": 62,
+    "cw": 16488,
+    "cr": 17494,
+    "cost": 0.230924
+   },
+   "delegated": false
+  },
+  {
+   "arm": "A",
+   "task": "pr-desc",
+   "type": "chore",
+   "trial": 1,
+   "sid": "4cc080b6-a20c-4579-b1a9-87e40c0dafe4",
+   "sid2": "292c81fd-38b3-4ca6-a891-c6715aa69788",
+   "success": true,
+   "exp": {
+    "in": 11709,
+    "out": 841,
+    "cw": 15936,
+    "cr": 71395,
+    "cost": 0.42973500000000003
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 423,
+    "out": 59,
+    "cw": 19201,
+    "cr": 17494,
+    "cost": 0.2646865
+   },
+   "delegated": false
+  },
+  {
+   "arm": "A",
+   "task": "pr-desc",
+   "type": "chore",
+   "trial": 2,
+   "sid": "dcc4d3c3-6e17-4b0b-9487-3efd2b0d2227",
+   "sid2": "da7eb192-f8d0-4047-9f78-cea209d7e589",
+   "success": true,
+   "exp": {
+    "in": 11835,
+    "out": 697,
+    "cw": 15945,
+    "cr": 71444,
+    "cost": 0.42395650000000007
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 423,
+    "out": 44,
+    "cw": 19184,
+    "cr": 17494,
+    "cost": 0.263724
+   },
+   "delegated": false
+  },
+  {
+   "arm": "A",
+   "task": "pr-desc",
+   "type": "chore",
+   "trial": 3,
+   "sid": "90180648-0e3d-4116-94c4-873e11f6ff6f",
+   "sid2": "483b8380-5602-431e-aaf1-2c9599be3561",
+   "success": true,
+   "exp": {
+    "in": 11709,
+    "out": 872,
+    "cw": 15776,
+    "cr": 71216,
+    "cost": 0.429106
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 423,
+    "out": 77,
+    "cw": 19098,
+    "cr": 17494,
+    "cost": 0.264299
+   },
+   "delegated": false
+  },
+  {
+   "arm": "B",
+   "task": "changelog",
+   "type": "chore",
+   "trial": 1,
+   "sid": "5424e701-e999-4807-a615-b69a1b9aa7bb",
+   "sid2": "77cc2bd0-17a0-41a4-ba6f-9e0a1b8c95b1",
+   "success": true,
+   "exp": {
+    "in": 12159,
+    "out": 1481,
+    "cw": 14243,
+    "cr": 70042,
+    "cost": 0.44371950000000004
+   },
+   "sub": {
+    "in": 66,
+    "out": 221,
+    "cw": 11683,
+    "cr": 72322,
+    "cost": 0.02300695
+   },
+   "followup_exp": {
+    "in": 636,
+    "out": 43,
+    "cw": 17561,
+    "cr": 17494,
+    "cost": 0.2455165
+   },
+   "delegated": true
+  },
+  {
+   "arm": "B",
+   "task": "changelog",
+   "type": "chore",
+   "trial": 2,
+   "sid": "112bdd83-7692-4dc8-9325-d7872e39cf75",
+   "sid2": "7352f688-39f1-4bbf-af1f-15b70834b026",
+   "success": true,
+   "exp": {
+    "in": 9000,
+    "out": 836,
+    "cw": 13545,
+    "cr": 38576,
+    "cost": 0.3396885
+   },
+   "sub": {
+    "in": 58,
+    "out": 102,
+    "cw": 11938,
+    "cr": 61147,
+    "cost": 0.021605199999999998
+   },
+   "followup_exp": {
+    "in": 289,
+    "out": 372,
+    "cw": 13771,
+    "cr": 17494,
+    "cost": 0.2111215
+   },
+   "delegated": true
+  },
+  {
+   "arm": "B",
+   "task": "changelog",
+   "type": "chore",
+   "trial": 3,
+   "sid": "96faaf15-3031-49ca-97d0-ddf7b69b6d75",
+   "sid2": "22175fab-9c0a-4001-98a5-bfa4f39ed5ab",
+   "success": true,
+   "exp": {
+    "in": 12159,
+    "out": 1420,
+    "cw": 14269,
+    "cr": 70086,
+    "cost": 0.4410385
+   },
+   "sub": {
+    "in": 74,
+    "out": 13,
+    "cw": 13163,
+    "cr": 88626,
+    "cost": 0.02545535
+   },
+   "followup_exp": {
+    "in": 636,
+    "out": 73,
+    "cw": 17583,
+    "cr": 17494,
+    "cost": 0.2472915
+   },
+   "delegated": true
+  },
+  {
+   "arm": "B",
+   "task": "commit",
+   "type": "chore",
+   "trial": 1,
+   "sid": "e9147e24-355f-43b8-979c-38f92713e2ed",
+   "sid2": "f8db4bce-ec65-453e-96c6-3d1577fb2616",
+   "success": true,
+   "exp": {
+    "in": 9650,
+    "out": 1006,
+    "cw": 14416,
+    "cr": 38548,
+    "cost": 0.365548
+   },
+   "sub": {
+    "in": 34,
+    "out": 11,
+    "cw": 10771,
+    "cr": 27317,
+    "cost": 0.016284450000000002
+   },
+   "followup_exp": {
+    "in": 289,
+    "out": 356,
+    "cw": 14514,
+    "cr": 17494,
+    "cost": 0.219609
+   },
+   "delegated": true
+  },
+  {
+   "arm": "B",
+   "task": "commit",
+   "type": "chore",
+   "trial": 2,
+   "sid": "45a3467e-24fc-4813-8ee2-d0e03c5c45b3",
+   "sid2": "7b3a6bd4-f009-4fb8-b6a1-fb4181cb3c05",
+   "success": true,
+   "exp": {
+    "in": 9650,
+    "out": 963,
+    "cw": 14303,
+    "cr": 38552,
+    "cost": 0.36198949999999996
+   },
+   "sub": {
+    "in": 26,
+    "out": 10,
+    "cw": 10929,
+    "cr": 16884,
+    "cost": 0.01542565
+   },
+   "followup_exp": {
+    "in": 291,
+    "out": 507,
+    "cw": 15110,
+    "cr": 49343,
+    "cost": 0.266478
+   },
+   "delegated": true
+  },
+  {
+   "arm": "B",
+   "task": "commit",
+   "type": "chore",
+   "trial": 3,
+   "sid": "a1887ee9-ca9f-4e6a-94d6-cf89ed7608cf",
+   "sid2": "813cb44d-4d02-45b7-acf4-956e22626bfc",
+   "success": true,
+   "exp": {
+    "in": 9524,
+    "out": 962,
+    "cw": 14173,
+    "cr": 38554,
+    "cost": 0.3590565
+   },
+   "sub": {
+    "in": 34,
+    "out": 335,
+    "cw": 10915,
+    "cr": 27208,
+    "cost": 0.018073549999999997
+   },
+   "followup_exp": {
+    "in": 291,
+    "out": 636,
+    "cw": 15083,
+    "cr": 49274,
+    "cost": 0.27252149999999997
+   },
+   "delegated": true
+  },
+  {
+   "arm": "B",
+   "task": "log-filter",
+   "type": "chore",
+   "trial": 1,
+   "sid": "4b695da2-804a-44f7-9d0e-f1552adea3bc",
+   "sid2": "c33dd58d-19d1-4b71-9d3a-4acd5e9c166b",
+   "success": true,
+   "exp": {
+    "in": 12159,
+    "out": 804,
+    "cw": 13911,
+    "cr": 69336,
+    "cost": 0.4050135
+   },
+   "sub": {
+    "in": 34,
+    "out": 13,
+    "cw": 17001,
+    "cr": 38963,
+    "cost": 0.02524655
+   },
+   "followup_exp": {
+    "in": 636,
+    "out": 60,
+    "cw": 17156,
+    "cr": 17494,
+    "cost": 0.241304
+   },
+   "delegated": true
+  },
+  {
+   "arm": "B",
+   "task": "log-filter",
+   "type": "chore",
+   "trial": 2,
+   "sid": "ed763dde-5624-4568-9bd2-824a2b50f94e",
+   "sid2": "e34b70ba-a665-4969-aa43-626ac620c160",
+   "success": true,
+   "exp": {
+    "in": 12159,
+    "out": 777,
+    "cw": 13632,
+    "cr": 69267,
+    "cost": 0.400107
+   },
+   "sub": {
+    "in": 50,
+    "out": 16,
+    "cw": 10819,
+    "cr": 45102,
+    "cost": 0.01816395
+   },
+   "followup_exp": {
+    "in": 636,
+    "out": 59,
+    "cw": 17019,
+    "cr": 17494,
+    "cost": 0.2395415
+   },
+   "delegated": true
+  },
+  {
+   "arm": "B",
+   "task": "log-filter",
+   "type": "chore",
+   "trial": 3,
+   "sid": "06622097-2fd7-43dc-abcf-2e4499bd44b6",
+   "sid2": "595a978c-865f-412a-990c-4146302e41a8",
+   "success": true,
+   "exp": {
+    "in": 12161,
+    "out": 770,
+    "cw": 17011,
+    "cr": 100253,
+    "cost": 0.4730005
+   },
+   "sub": {
+    "in": 58,
+    "out": 20,
+    "cw": 17536,
+    "cr": 88618,
+    "cost": 0.030939799999999996
+   },
+   "followup_exp": {
+    "in": 636,
+    "out": 65,
+    "cw": 17091,
+    "cr": 17494,
+    "cost": 0.2407415
+   },
+   "delegated": true
+  },
+  {
+   "arm": "B",
+   "task": "pr-desc",
+   "type": "chore",
+   "trial": 1,
+   "sid": "7802b929-789a-4ed3-9016-0ceb33e1011f",
+   "sid2": "f398be8c-63f4-4852-a2f8-42b1acdbe749",
+   "success": true,
+   "exp": {
+    "in": 12159,
+    "out": 665,
+    "cw": 13736,
+    "cr": 69393,
+    "cost": 0.395933
+   },
+   "sub": {
+    "in": 132,
+    "out": 126,
+    "cw": 11287,
+    "cr": 27742,
+    "cost": 0.017644950000000003
+   },
+   "followup_exp": {
+    "in": 636,
+    "out": 58,
+    "cw": 17043,
+    "cr": 17494,
+    "cost": 0.2397915
+   },
+   "delegated": true
+  },
+  {
+   "arm": "B",
+   "task": "pr-desc",
+   "type": "chore",
+   "trial": 2,
+   "sid": "df4792d8-b1a4-480a-a331-fe6932d12ab6",
+   "sid2": "d8ba0126-6d3d-4c86-9763-019d9146ccf3",
+   "success": true,
+   "exp": {
+    "in": 12159,
+    "out": 650,
+    "cw": 13658,
+    "cr": 69341,
+    "cost": 0.394156
+   },
+   "sub": {
+    "in": 26,
+    "out": 11,
+    "cw": 10823,
+    "cr": 16652,
+    "cost": 0.01527495
+   },
+   "followup_exp": {
+    "in": 636,
+    "out": 48,
+    "cw": 16980,
+    "cr": 17494,
+    "cost": 0.238504
+   },
+   "delegated": true
+  },
+  {
+   "arm": "B",
+   "task": "pr-desc",
+   "type": "chore",
+   "trial": 3,
+   "sid": "fd715ad2-23e7-4f4e-a20d-51c21aacc624",
+   "sid2": "4b64e70a-88d6-4abf-92af-faba9a30c98b",
+   "success": true,
+   "exp": {
+    "in": 12159,
+    "out": 720,
+    "cw": 13744,
+    "cr": 69440,
+    "cost": 0.39882999999999996
+   },
+   "sub": {
+    "in": 34,
+    "out": 129,
+    "cw": 11355,
+    "cr": 27876,
+    "cost": 0.017660350000000002
+   },
+   "followup_exp": {
+    "in": 636,
+    "out": 33,
+    "cw": 17067,
+    "cr": 17494,
+    "cost": 0.2388415
+   },
+   "delegated": true
+  },
+  {
+   "arm": "B",
+   "task": "probe-debug",
+   "type": "probe",
+   "trial": 1,
+   "sid": "9d0550b9-90d4-44d7-ba22-30dd20467ea6",
+   "sid2": "80ab2967-3dc9-47fc-928f-2481989801e6",
+   "success": true,
+   "exp": {
+    "in": 9000,
+    "out": 580,
+    "cw": 13778,
+    "cr": 38582,
+    "cost": 0.32980699999999996
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "delegated": false
+  },
+  {
+   "arm": "B",
+   "task": "probe-debug",
+   "type": "probe",
+   "trial": 2,
+   "sid": "7688873a-af3f-4a5e-88b5-531be802ecc2",
+   "sid2": "e7b72d2f-5a7e-4846-9c53-b4a4a58be984",
+   "success": true,
+   "exp": {
+    "in": 12159,
+    "out": 927,
+    "cw": 14247,
+    "cr": 69848,
+    "cost": 0.41587549999999995
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "delegated": false
+  },
+  {
+   "arm": "B",
+   "task": "probe-debug",
+   "type": "probe",
+   "trial": 3,
+   "sid": "518f1a8b-7939-44b7-8765-efe36129cb3f",
+   "sid2": "63a90aff-8162-4e7c-8429-ef5007842062",
+   "success": true,
+   "exp": {
+    "in": 12159,
+    "out": 1167,
+    "cw": 14813,
+    "cr": 69850,
+    "cost": 0.4349525
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "delegated": false
+  },
+  {
+   "arm": "B",
+   "task": "probe-explain",
+   "type": "probe",
+   "trial": 1,
+   "sid": "bef0f902-437a-4ced-8451-4b8215ab32be",
+   "sid2": "b77dfdf8-e2ca-4ac1-a16c-06fd2a84fe7a",
+   "success": true,
+   "exp": {
+    "in": 12159,
+    "out": 1035,
+    "cw": 16346,
+    "cr": 69245,
+    "cost": 0.44691
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "delegated": false
+  },
+  {
+   "arm": "B",
+   "task": "probe-explain",
+   "type": "probe",
+   "trial": 2,
+   "sid": "51db6885-6ae6-45e4-9523-71056e079e63",
+   "sid2": "5b2006d0-2498-402d-a0cd-d861134fe638",
+   "success": true,
+   "exp": {
+    "in": 12159,
+    "out": 1012,
+    "cw": 16380,
+    "cr": 69277,
+    "cost": 0.446217
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "delegated": false
+  },
+  {
+   "arm": "B",
+   "task": "probe-explain",
+   "type": "probe",
+   "trial": 3,
+   "sid": "2aec86e2-60d7-46b1-ad75-50d59a3ec542",
+   "sid2": "cc04d115-0ed5-4a73-8158-89132a631933",
+   "success": true,
+   "exp": {
+    "in": 11063,
+    "out": 977,
+    "cw": 16322,
+    "cr": 69224,
+    "cost": 0.43272900000000003
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "delegated": false
+  },
+  {
+   "arm": "B",
+   "task": "probe-refactor",
+   "type": "probe",
+   "trial": 1,
+   "sid": "1d900506-f6ab-4a26-80fe-7d5cc24d9f65",
+   "sid2": "f8e24abf-423f-485b-9242-365c8a669a89",
+   "success": true,
+   "exp": {
+    "in": 12165,
+    "out": 3621,
+    "cw": 22216,
+    "cr": 178216,
+    "cost": 0.758616
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "delegated": false
+  },
+  {
+   "arm": "B",
+   "task": "probe-refactor",
+   "type": "probe",
+   "trial": 2,
+   "sid": "8936b097-fa7b-4113-bc8d-ac6d477a9aa9",
+   "sid2": "d48b8716-6d34-474c-9a09-7a53fbd4eca5",
+   "success": true,
+   "exp": {
+    "in": 12165,
+    "out": 3697,
+    "cw": 22330,
+    "cr": 178435,
+    "cost": 0.76406
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "delegated": false
+  },
+  {
+   "arm": "B",
+   "task": "probe-refactor",
+   "type": "probe",
+   "trial": 3,
+   "sid": "837a2e6d-4431-45cb-aa72-e0a7d363259c",
+   "sid2": "7725d615-9792-49a7-b0da-b7e73bc80c9f",
+   "success": true,
+   "exp": {
+    "in": 12169,
+    "out": 3863,
+    "cw": 21676,
+    "cr": 249733,
+    "cost": 0.835523
+   },
+   "sub": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "followup_exp": {
+    "in": 0,
+    "out": 0,
+    "cw": 0,
+    "cr": 0,
+    "cost": 0.0
+   },
+   "delegated": false
+  }
+ ]
+}
