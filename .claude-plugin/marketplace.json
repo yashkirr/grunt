@@ -1,0 +1,13 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "grunt",
+  "owner": { "name": "Yashkir Ramsamy" },
+  "plugins": [
+    {
+      "name": "grunt",
+      "source": "./",
+      "description": "Delegate grunt work to a cheap Haiku subagent.",
+      "category": "productivity"
+    }
+  ]
+}

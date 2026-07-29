@@ -1,0 +1,19 @@
+{
+  "name": "grunt",
+  "version": "0.1.0",
+  "description": "Delegate grunt work (commits, PR descriptions, log fetching, ticket updates, any mechanical chore) to a cheap Haiku subagent — preserve your high-end model's usage limit and keep its context clean.",
+  "author": { "name": "Yashkir Ramsamy" },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/policy.sh\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
