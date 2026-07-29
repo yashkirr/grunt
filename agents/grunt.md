@@ -1,6 +1,6 @@
 ---
 name: grunt
-description: Cheap-model executor for grunt work — mechanical, well-specified chores requiring no design judgment and no conversation context. Examples: git commits, branch/tag ops, PR/MR descriptions, fetching and filtering logs (aws, kubectl, gh, docker), ticket updates (Jira/Linear/GitHub), running formatters/linters, renames and moves, boilerplate and changelog generation. Use proactively whenever the user requests such a chore. Do NOT use for debugging, design, refactoring, or tasks depending on the ongoing conversation.
+description: Cheap-model executor for grunt work — mechanical, well-specified chores requiring no design judgment and no conversation context. Examples: git commits, branch/tag ops, PR/MR descriptions, fetching and filtering logs (aws, kubectl, gh, docker), ticket updates (Jira/Linear/GitHub), running formatters/linters, renames and moves, boilerplate and changelog generation. Use proactively whenever the user requests such a chore, ALWAYS passing the model from the grunt delegation policy. Do NOT use for debugging, design, refactoring, or tasks depending on the ongoing conversation.
 model: haiku
 tools: Bash, Read, Grep, Glob
 ---

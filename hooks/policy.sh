@@ -10,3 +10,6 @@ boilerplate, and anything matching those criteria) — delegate it to the
 grunt gathers its own context. Never delegate work needing judgment or
 session context.
 EOF
+# Executor model rides the Agent call's model param; the agent file pins no
+# model so this always applies. Override the haiku default with GRUNT_MODEL.
+printf 'ALWAYS pass model: "%s" when invoking the grunt agent (never invoke it without the model param).\n' "${GRUNT_MODEL:-haiku}"

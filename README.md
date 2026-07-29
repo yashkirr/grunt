@@ -50,6 +50,26 @@ Or per-session, no install:
 claude --plugin-dir /path/to/grunt
 ```
 
+## Configuration
+
+- **Main model** — untouched. grunt works under any session model (Fable,
+  Opus, Sonnet); set it with `/model` as usual.
+- **Grunt executor model** — `haiku` by default. Override with the
+  `GRUNT_MODEL` env var (any model alias or full ID), e.g. run chores on
+  Sonnet instead:
+
+  ```json
+  // ~/.claude/settings.json
+  { "env": { "GRUNT_MODEL": "sonnet" } }
+  ```
+
+  or per session: `GRUNT_MODEL=sonnet claude`. The point stays the same:
+  route mechanical work to a model cheaper than the one you're thinking with.
+
+  Note: a `CLAUDE_CODE_SUBAGENT_MODEL` env var force-overrides the model of
+  *every* subagent (grunt included) and sits above all other config — unset
+  it if you want `GRUNT_MODEL` (or any per-agent model) to work.
+
 ## Does it actually save tokens?
 
 Yes — measured, not vibes. N=5 trials per arm, real headless `claude -p`
