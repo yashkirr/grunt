@@ -24,7 +24,10 @@ python3 evals/judge.py          # blind quality judging vs baseline artifacts
 ```
 
 Commit the regenerated `evals/snapshots/results.json` and `evals/benchmark.md`
-with your change so the numbers are reviewable as a diff.
+with your change so the numbers are reviewable as a diff. The README's
+benchmark numbers are generated from the snapshot — `bench.sh` re-syncs them
+automatically; after editing `evals/quality.md` by hand or via `judge.py`,
+run `python3 evals/readme_sync.py` (CI-style drift check: `--check`).
 
 Adding a task or probe: append to `evals/tasks.json` (probes are prompts that
 should NOT be delegated) and add a fixture mode to `evals/gen_fixture.py` if

@@ -20,7 +20,11 @@
 
 ---
 
-A [Claude Code](https://code.claude.com/docs) plugin that teaches your main model to route mechanical work — commits, PR descriptions, log fetching, ticket updates — to a cheaper subagent (Haiku by default), while your expensive model (Fable/Opus/Sonnet) keeps its context and your usage limit for actual thinking. Measured on real sessions: **43% less expensive-model input per chore** and **12/12 chores routed correctly with 0/9 false positives**.
+A [Claude Code](https://code.claude.com/docs) plugin that teaches your main model to route mechanical work — commits, PR descriptions, log fetching, ticket updates — to a cheaper subagent (Haiku by default), while your expensive model (Fable/Opus/Sonnet) keeps its context and your usage limit for actual thinking.
+
+<!-- bench:headline -->
+Measured on real sessions: **43% less expensive-model input per chore**, **12/12 chores routed correctly, 0/9 false positives**.
+<!-- /bench:headline -->
 
 Two things drain a high-end model session: usage limits deplete faster on expensive models, and every bulky tool output (a 300-line diff, a log dump) that enters the main context gets re-sent on every later turn. Routine chores cause both and need zero high-end reasoning. Don't pay thinking prices for typing.
 
@@ -132,11 +136,11 @@ stays consistent deep into long sessions.
 
 ## Benchmarks
 
-4 chore tasks (commit, PR description, log filtering, changelog) × 2 arms ×
-3 trials, plus 3 non-chore probes × 3 trials: **33 real headless `claude -p`
-sessions** on `claude-fable-5`, run in parallel. Per-model token counts are
-parsed from the session transcripts; dollar figures use API list prices as a
-proxy for limit burn.
+Numbers below are generated from the committed snapshot by
+`evals/readme_sync.py` — they cannot drift from the data.
+
+<!-- bench:scoreboard -->
+4 chore tasks (changelog, commit, log-filter, pr-desc) × 2 arms × 3 trials, plus 3 non-chore probes × 3 trials: **33 real headless `claude -p` sessions** on `claude-fable-5` (executor: haiku), snapshot 2026-07-29. Per-model token counts are parsed from the session transcripts; dollar figures use API list prices as a proxy for limit burn.
 
 | Metric (median, all chores) | Baseline | With grunt |
 |---|---:|---:|
@@ -144,9 +148,8 @@ proxy for limit burn.
 | Expensive-model cost per chore | $0.548 | $0.397 (**-28%**) |
 | Total cost, all models | $0.810 | $0.654 (**-19%**) |
 
-**Routing: 12/12 chores delegated, 0/9 non-chore probes falsely delegated,
-33/33 tasks completed.** (Completed means the commit landed or the file was
-written — correctness is measured separately below.)
+**Routing: 12/12 chores delegated, 0/9 non-chore probes falsely delegated, 33/33 tasks completed.** (Completed means the commit landed or the file was written — correctness is measured separately below.)
+<!-- /bench:scoreboard -->
 
 - Savings scale with how much bulky context the chore drags in: changelog
   (write + stage + commit) saved the most, a short PR description the
@@ -155,16 +158,18 @@ written — correctness is measured separately below.)
 - Numbers are per single chore in a fresh session; in a long working
   session the clean-context effect compounds on every subsequent turn.
 
-**The quality tradeoff, measured honestly:** a blind pairwise judge (fable,
-arm order anonymized) preferred the baseline's artifacts 8/12 with 4 ties —
-haiku's messages are complete but less precise (an occasional miscount, an
-omitted diff detail). A verification-focused prompt revision did not move
-that score. On objective ground-truth checks both arms are near-perfect:
-log ERROR counts 100% correct in both arms, Conventional Commits subjects
-9/9 baseline vs 8/9 grunt. Chores get done correctly; the prose is a notch
+**The quality tradeoff, measured honestly:**
+
+<!-- bench:quality -->
+A blind pairwise judge (claude-fable-5, arm order anonymized) preferred the baseline's artifacts **8/12**, with **4 ties and 0 grunt wins**. On objective ground-truth checks both arms are close: baseline 9/9, grunt 8/9 (deterministic log ERROR counts; Conventional Commits subjects regex-checked).
+<!-- /bench:quality -->
+
+The cheap executor's messages are complete but less precise — an occasional
+miscount, an omitted diff detail. A verification-focused prompt revision did
+not move the judge score. Chores get done correctly; the prose is a notch
 less polished. If that notch matters, set `GRUNT_MODEL=sonnet` (a measured
-comparison of Sonnet as executor is queued — see the roadmap). Full
-verdicts: [evals/quality.md](evals/quality.md).
+Sonnet comparison is queued — see the roadmap). Full verdicts:
+[evals/quality.md](evals/quality.md).
 
 Per-task tables: [evals/benchmark.md](evals/benchmark.md). Raw snapshot:
 [evals/snapshots/results.json](evals/snapshots/results.json).
@@ -205,8 +210,8 @@ Claude Code's standard per-tool permission settings.
 
 ## Limitations
 
-- Routing is judged by the main model against an injected policy — measured
-  at 12/12 on the benchmark suite, but it is model behavior, not a
+- Routing is judged by the main model against an injected policy — accuracy
+  is measured in the benchmark table above, but it is model behavior, not a
   deterministic router. Say "use the grunt agent" to force it.
 - The subagent has no conversation context by design. Chores that genuinely
   need session context stay on the main model — that's the policy working,

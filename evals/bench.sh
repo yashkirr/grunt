@@ -119,3 +119,4 @@ python3 "$ROOT/evals/bench_measure.py" collect "$WORK/trials" --model "$MODEL" \
   --grunt-model "${GRUNT_MODEL:-haiku}" --followup "$FOLLOWUP" > "$SNAP"
 echo "snapshot: $SNAP"
 python3 "$ROOT/evals/bench_measure.py" report "$SNAP" | tee "$ROOT/evals/benchmark${OUT:+-$OUT}.md"
+python3 "$ROOT/evals/readme_sync.py"
